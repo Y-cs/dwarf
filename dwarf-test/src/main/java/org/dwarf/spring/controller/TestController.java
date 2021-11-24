@@ -20,7 +20,9 @@ public class TestController {
 
     @RequestMapping("test")
     public void test() {
+        long l = System.currentTimeMillis();
         testService.test("这是信息");
+        System.out.println(System.currentTimeMillis() - l);
     }
 
 }
