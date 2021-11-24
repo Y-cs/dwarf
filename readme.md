@@ -31,6 +31,16 @@ Spel的解析式可以解析的参数是方法的入参和自定义参数:
 2. 流程中自定义的参数
     1. 使用`RecordContextManager.INSTANCE.addParam(key,value,true);`即可穿透使用
 
+##### 重入问题解决
+
+```
+当发生A方法调用B方法时,A方法和B方法都存在该日志注解
+再次createRecord对象时会从当前线程中获取到日志操作上下文
+step前进一步,通过List<Map>隔离参数,同时实现参数穿透的方案
+然后在执行结束后调用RecordSupport.clear使step后退一步
+当退到0时清理线程中的上下文,以此来解决重入
+```
+
 ##### 日志的持久化
 
 持久化日志是使用者自定义的方案,需实现`RecordPersistence`接口<br>
