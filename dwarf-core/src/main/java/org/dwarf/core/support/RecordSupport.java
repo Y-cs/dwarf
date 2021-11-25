@@ -1,7 +1,7 @@
 package org.dwarf.core.support;
 
 import org.aspectj.lang.reflect.MethodSignature;
-import org.dwarf.core.ano.LogParam;
+import org.dwarf.core.ano.RecordParam;
 import org.dwarf.core.ano.Record;
 import org.dwarf.core.config.ParameterKey;
 import org.dwarf.core.config.RecordConfig;
@@ -92,16 +92,16 @@ public class RecordSupport {
             //参数名
             String name = parameterNames[i];
             //参数注解
-            LogParam logParam = Arrays.stream(parameterAnnotations[i])
-                    .filter(pa -> pa.annotationType().equals(LogParam.class))
-                    .map(pa -> (LogParam) pa).findFirst().orElse(null);
-            if (logParam != null) {
-                if (logParam.name() != null && logParam.name().length() > 0) {
+            RecordParam recordParam = Arrays.stream(parameterAnnotations[i])
+                    .filter(pa -> pa.annotationType().equals(RecordParam.class))
+                    .map(pa -> (RecordParam) pa).findFirst().orElse(null);
+            if (recordParam != null) {
+                if (recordParam.name() != null && recordParam.name().length() > 0) {
                     //有别名
-                    name = logParam.name();
+                    name = recordParam.name();
                 }
             }
-            if (logParam != null && logParam.isAcross()) {
+            if (recordParam != null && recordParam.isAcross()) {
                 //穿透参数
                 RecordContextManager.INSTANCE.addParam(name, args.get(i), true);
             } else {

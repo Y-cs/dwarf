@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  **/
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.PARAMETER})
-public @interface LogParam {
+public @interface RecordParam {
     /**
      * 别名
      *
@@ -20,5 +20,10 @@ public @interface LogParam {
      */
     String name() default "";
 
+    /**
+     * 是否穿透
+     *
+     * @return
+     */
     boolean isAcross() default false;
 }

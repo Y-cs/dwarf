@@ -1,6 +1,6 @@
 package org.dwarf.spring.service;
 
-import org.dwarf.core.ano.LogParam;
+import org.dwarf.core.ano.RecordParam;
 import org.dwarf.core.ano.Record;
 import org.dwarf.core.context.RecordContextManager;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class TestService {
     }
 
     @Record(success = "chenggong:`#s`,in:`#in`", condition = "#i!=10")
-    public boolean test(@LogParam(name = "s", isAcross = true) String ss) {
+    public boolean test(@RecordParam(name = "s", isAcross = true) String ss) {
         testServiceB.testB(12);
         RecordContextManager.INSTANCE.addParam("i", 10);
         try {

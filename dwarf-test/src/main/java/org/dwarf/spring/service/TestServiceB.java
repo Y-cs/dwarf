@@ -1,6 +1,6 @@
 package org.dwarf.spring.service;
 
-import org.dwarf.core.ano.LogParam;
+import org.dwarf.core.ano.RecordParam;
 import org.dwarf.core.ano.Record;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class TestServiceB {
 
     @Record(success = "s:`#s`,integer:`#in`",condition = "#in!=12")
-    public void testB(@LogParam(isAcross = true) Integer in) {
+    public void testB(@RecordParam(isAcross = true) Integer in) {
 
     }
 
