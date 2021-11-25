@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestServiceB {
 
-    @Record(success = "s:`#s`,integer:`#in`")
+    @Record(success = "s:`#s`,integer:`#in`",condition = "#in!=12")
     public void testB(@LogParam(isAcross = true) Integer in) {
 
     }

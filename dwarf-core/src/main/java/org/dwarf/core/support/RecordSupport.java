@@ -161,6 +161,7 @@ public class RecordSupport {
         //spel root object
         RecordRootObject recordRootObject = this.recordConfig.getRecordRootObject();
         parseContext.setRootObject(recordRootObject);
+        parseContext.setCondition(this.record.condition());
         switch (cycle) {
             case NOT_RUN:
             case IS_RUN:
@@ -178,14 +179,16 @@ public class RecordSupport {
         }
         //执行解析
         this.logParse.doExecutor(parseContext);
-        //解析结果
-        persistenceContext.setMessage(parseContext.getResultMessage());
-        //操作人
-        persistenceContext.setOperator(recordRootObject.operator());
-        //报错内容
-        persistenceContext.setThrowable(this.throwable);
-        persistenceContext.setBusinessCode(this.record.businessCode());
-        this.recordConfig.getPersistence().save(persistenceContext);
+        if (parseContext.isCanOutput()) {
+            //解析结果
+            persistenceContext.setMessage(parseContext.getResultMessage());
+            //操作人
+            persistenceContext.setOperator(recordRootObject.operator());
+            //报错内容
+            persistenceContext.setThrowable(this.throwable);
+            persistenceContext.setBusinessCode(this.record.businessCode());
+            this.recordConfig.getPersistence().save(persistenceContext);
+        }
     }
 
     /**

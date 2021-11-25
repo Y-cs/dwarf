@@ -1,6 +1,7 @@
 package org.dwarf.core.context;
 
 import lombok.Data;
+import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.util.List;
 import java.util.Map;
@@ -28,5 +29,11 @@ public class ParseContext {
     private Object rootObject;
 
     private Map<String, Object> analyticValue;
+
+    private StandardEvaluationContext spelCtx;
+
+    private String condition;
+
+    private boolean canOutput = true;
 
 }

@@ -25,12 +25,25 @@ public class LogParseBySpel extends LogParse {
     @Override
     public void doExecutor(ParseContext parseContext) {
         StandardEvaluationContext ctx = new StandardEvaluationContext();
+        parseContext.setSpelCtx(ctx);
         ctx.setRootObject(parseContext.getRootObject());
         if (parseContext.getAcrossParameter() != null) {
             ctx.setVariables(parseContext.getAcrossParameter());
         }
         if (parseContext.getParameter() != null) {
             ctx.setVariables(parseContext.getParameter());
+        }
+        //condition判断
+        String condition = parseContext.getCondition();
+        if (condition != null && parseContext.getCondition().length() > 0) {
+            SpelExpressionParser parser = new SpelExpressionParser();
+            Expression exp = parser.parseExpression(condition.trim());
+            Boolean conditionResult = exp.getValue(ctx, Boolean.class);
+            if (Boolean.FALSE.equals(conditionResult)) {
+                //条件判断未通过结束执行
+                parseContext.setCanOutput(false);
+                return;
+            }
         }
         parseContext.setAnalyticValue(doAnalytic(parseContext.getSpelExpression(), ctx));
         super.doNext(parseContext);
