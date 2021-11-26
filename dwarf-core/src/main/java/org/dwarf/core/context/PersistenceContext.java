@@ -26,4 +26,6 @@ public class PersistenceContext {
 
     private String businessCode;
 
+    private String extend;
+
 }

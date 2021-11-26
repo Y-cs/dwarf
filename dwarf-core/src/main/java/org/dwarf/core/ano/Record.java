@@ -14,14 +14,45 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 public @interface Record {
 
+    /**
+     * 成功返回
+     *
+     * @return
+     */
     String success();
 
+    /**
+     * 失败返回
+     *
+     * @return
+     */
     String fail() default "";
 
+    /**
+     * 判断条件
+     *
+     * @return
+     */
     String condition() default "";
 
+    /**
+     * 处理人
+     *
+     * @return
+     */
     String operator() default "";
 
+    /**
+     * 业务编码
+     *
+     * @return
+     */
     String businessCode() default "";
 
+    /**
+     * 扩展字段 意义在于成功或者失败都应该有的东西
+     *
+     * @return
+     */
+    String extendAttribute() default "";
 }

@@ -20,7 +20,7 @@ public class TestService {
         this.testServiceB = testServiceB;
     }
 
-    @Record(success = "chenggong:`#s`,in:`#in`", condition = "#i!=10")
+    @Record(success = "chenggong:`#s`,in:`#in`", condition = "#i!=12",extendAttribute = "`#s`")
     public boolean test(@RecordParam(name = "s", isAcross = true) String ss) {
         testServiceB.testB(12);
         RecordContextManager.INSTANCE.addParam("i", 10);

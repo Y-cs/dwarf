@@ -23,6 +23,7 @@ public class RecordParseFactory {
 
         this.addParse(new LogParseBySpacer());
         this.addParse(new LogParseBySpel());
+        this.addParse(new LogParseByExtend());
         this.addParse(new LogParseByAssemble());
     }
 

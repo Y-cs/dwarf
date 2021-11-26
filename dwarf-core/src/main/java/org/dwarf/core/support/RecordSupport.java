@@ -162,6 +162,7 @@ public class RecordSupport {
         RecordRootObject recordRootObject = this.recordConfig.getRecordRootObject();
         parseContext.setRootObject(recordRootObject);
         parseContext.setCondition(this.record.condition());
+        parseContext.setExtendAttribute(this.record.extendAttribute());
         switch (cycle) {
             case NOT_RUN:
             case IS_RUN:
@@ -187,6 +188,7 @@ public class RecordSupport {
             //报错内容
             persistenceContext.setThrowable(this.throwable);
             persistenceContext.setBusinessCode(this.record.businessCode());
+            persistenceContext.setExtend(parseContext.getExtendAttribute());
             this.recordConfig.getPersistence().save(persistenceContext);
         }
     }
