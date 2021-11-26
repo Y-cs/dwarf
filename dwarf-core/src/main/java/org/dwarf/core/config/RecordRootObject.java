@@ -38,5 +38,22 @@ public interface RecordRootObject {
         return DateTimeFormatter.ofPattern(pattern).format(LocalDateTime.now());
     }
 
+    /**
+     * username
+     *
+     * @return
+     */
+    default String username() {
+        return operator().name();
+    }
+
+    /**
+     * userid
+     *
+     * @return
+     */
+    default long userid() {
+        return operator().id();
+    }
 
 }
